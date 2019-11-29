@@ -1,10 +1,11 @@
 const Bootcamp = require('../models/Bootcamp');
+const advancedResults = require('../middleware/advancedResult');
 
 class BootcampService {
     constructor() { }
-
-    async getBootcamps() {
-        return await Bootcamp.find();
+  
+    async getBootcamps(req, res) {
+        return await advancedResults(Bootcamp, req, res);
     };
 
     async getBootcamp(id) {

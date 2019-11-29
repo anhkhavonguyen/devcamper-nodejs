@@ -5,8 +5,8 @@ const AsynHandler = require('../middleware/async');
 // @route GET /api/v1/bootcamps
 exports.getBootcamps = AsynHandler(async (req, res, next) => {
     var _bootcampService = new BootcampService();
-    var result = await _bootcampService.getBootcamps();
-    res.status(200).json({ success: true, count: result.length, data: result });
+    let result = await _bootcampService.getBootcamps(req, res, next);
+    res.status(200).json(result);
 });
 
 // @route GET /api/v1/bootcamps/:id
