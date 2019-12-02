@@ -4,7 +4,7 @@ const morgan = require('morgan');
 //color at console
 const color = require('colors');
 const errHandler = require('./middleware/error');
-
+const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 
 //Load env vars
@@ -25,6 +25,9 @@ if (process.env.NODE_ENV == 'development') {
 
 //Body parser
 app.use(express.json());
+
+//Cookie parser
+app.use(cookieParser());
 
 //Mount Route
 app.use('/api/v1/bootcamps', bootcamps);

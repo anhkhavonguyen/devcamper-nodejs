@@ -11,6 +11,10 @@ class UserService {
     async GetByEmail(email) {
         return await User.findOne({ email }).select('+password');
     }
+
+    async GetById(id) {
+        return await User.findById({ id });
+    }
 };
 
 module.exports = UserService;
