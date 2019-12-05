@@ -4,12 +4,12 @@ const UserService = require('../services/userService');
 
 // @route POST /api/v1/auth Register
 exports.register = AsynHandler(async (req, res, next) => {
-
     const { name, email, password, role } = req.body;
     var _userService = new UserService();
 
     //Create User
     const user = _userService.Create(name, email, password, role);
+
     user.then(function (resultUser) {
         //Create token
         const token = resultUser.getSignedJwtToken();
@@ -39,13 +39,11 @@ exports.login = AsynHandler(async (req, res, next) => {
         //check if password matched
         const isMatch = resultUser.matchPassword(password);
 
-        isMatch.then(function (resultIsMatch) {
-            if (!resultIsMatch) {
-                return next(new ErrorResponse('Invalid credentials', 401));
-            } else {
-                sendTokenResponse(resultUser, 200, res)
-            }
-        })
+        if (!isMatch) {
+            return next(new ErrorResponse('Invalid credentials', 401));
+        } else {
+            sendTokenResponse(resultUser, 200, res)
+        }
     });
 });
 
@@ -74,11 +72,11 @@ exports.getMe = AsynHandler(async (req, res, next) => {
     var _userService = new UserService();
     var data = _userService.GetById(req.user.id);
 
-    data.then(function (resul) {
-        if (resul) {
+    data.then(function (result) {
+        if (result) {
             res.status(200).json({
                 success: true,
-                data: resul
+                data: result
             });
         }
     });
