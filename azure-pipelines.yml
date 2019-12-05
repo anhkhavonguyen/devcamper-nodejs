@@ -15,7 +15,7 @@ variables:
   webAppName: 'devcamper'
   
   # Environment name
-  environmentName: 'production'
+  environmentName: 'dev'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -51,4 +51,4 @@ stages:
         replaceExistingArchive: true
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      artifact: devcamper
+      artifact: drop
