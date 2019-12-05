@@ -15,7 +15,7 @@ variables:
   webAppName: 'devcamper'
   
   # Environment name
-  environmentName: 'dev'
+  environmentName: 'production'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
